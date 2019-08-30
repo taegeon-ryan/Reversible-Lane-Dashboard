@@ -73,9 +73,9 @@ var insert = setInterval(() => {
 }, 100);
 
 var count = 0;
-var traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var traffic_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var traffic_simple = [0,0];
-var status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var status_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 var clear = setInterval(() => {
   var selectsql = 'SELECT * FROM traffic ORDER BY idx DESC';
@@ -89,10 +89,10 @@ var clear = setInterval(() => {
         var i = 0;
         for(i = 0; i < results.length; i++){
           var point = results[i].traffic_x + results[i].traffic_y*7;
-          traffic_nomal[point]++;
-          if(status_nomal[point] == 1){
+          traffic_normal[point]++;
+          if(status_normal[point] == 1){
             traffic_simple[0]++;
-          }else if(status_nomal[point] == 2){
+          }else if(status_normal[point] == 2){
             traffic_simple[1]++;
           }else {
             console.log("신호를 무시한 traffic 이 발생하였습니다. 입력자 또는 실제 상황을 주시하세요.");
@@ -114,13 +114,15 @@ var clear = setInterval(() => {
   count++;
   if(count == 6){
     count = 0;
-    console.log(status_nomal);
-    console.log(status_simple);
+    console.log(status_normal);
+    console.log(traffic_normal);
+    console.log(traffic_simple);
     traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     traffic_simple = [0,0];
     status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    console.log(status_nomal);
-    console.log(status_simple);
+    console.log(status_normal);
+    console.log(traffic_normal);
+    console.log(traffic_simple);
   }
 }, 1000);
 
