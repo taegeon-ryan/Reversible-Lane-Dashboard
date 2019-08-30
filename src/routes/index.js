@@ -83,7 +83,7 @@ var clear = setInterval(() => {
     if(error) {
       console.log("error");
     }else {
-      if(results[0]){
+      if(!results[0]){
         console.log("수집된 데이터가 없습니다.");
       }else{
         var i = 0;
