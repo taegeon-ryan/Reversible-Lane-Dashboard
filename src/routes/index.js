@@ -58,7 +58,7 @@ var traffic = [0,0,0];
 var test_x = 1;
 var test_y = 2;
 
-setTimeout(() => {
+var insert = setInterval(() => {
   var insertsql = 'INSERT INTO traffic (traffic_x, traffic_y) VALUES (? , ?)';
 
   db.query(insertsql,[test_x, test_y] ,function (error, results) {
@@ -74,7 +74,7 @@ setTimeout(() => {
   test_y = test_y + 2;
 }, 1000);
 
-setTimeout(() => {
+var clear = setInterval(() => {
   var clearsql = 'DELETE FROM traffic';
   db.query(clearsql, function (error, results) {
     if (error) {
@@ -82,11 +82,7 @@ setTimeout(() => {
       console.log("err");
     }
     else  {
-      if(!results[0]){
-        console.log("no");
-      }else{
-        console.log(results);
-      }
+      console.log(results);
     }
   });
 }, 60000);
