@@ -77,6 +77,26 @@ var traffic_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var traffic_simple = [0,0];
 var status_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
+var now_status = setInterval(()=>{
+  var selectsql = 'SELECT * FROM signal_data ORDER BY idx DESC LIMIT 1';
+  db.query(selectsql, (error, results)=>{
+    if(error) {
+      console.log("error");
+    }else {
+      if(!results[0]){
+        console.log("수집된 데이터가 없습니다.");
+      }else{
+        var i = 0;
+        var result_array = results[0].input_data.split('');
+        for(i = 0; i < 21; i++){
+          status_normal[i] = result_array[i];
+        }
+        console.log("now status loaded");
+      }
+    }
+  });
+}, 500);
+
 var clear = setInterval(() => {
   var selectsql = 'SELECT * FROM traffic ORDER BY idx DESC';
   db.query(selectsql, (error, results)=>{
