@@ -70,22 +70,54 @@ var insert = setInterval(() => {
       console.log("insert success");
     }
   });
-  test_x = test_x + 1;
-  test_y = test_y + 2;
 }, 1000);
 
+var count = 0;
+var traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var traffic_simple = [0,0];
+var status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
 var clear = setInterval(() => {
-  var clearsql = 'DELETE FROM traffic';
-  db.query(clearsql, function (error, results) {
-    if (error) {
-      status = "err";
-      console.log("err");
-    }
-    else  {
-      console.log(results);
+  var selectsql = 'SELECT * FROM traffic ORDER BY DESC';
+  db.query(selectsql, (error, results)=>{
+    if(error) {
+      console.log("error");
+    }else {
+      if(results[0]){
+        console.log("수집된 데이터가 없습니다.");
+      }else{
+        var i = 0;
+        for(i = 0; i < results.length; i++){
+          var point = results[i].traffic_x + results[i].traffic_y*7;
+          traffic_nomal[point]++;
+          if(status_nomal[point] == 1){
+            traffic_simple[0]++;
+          }else if(status_nomal[point] == 2){
+            traffic_simple[1]++;
+          }else {
+            console.log("신호를 무시한 traffic 이 발생하였습니다. 입력자 또는 실제 상황을 주시하세요.");
+          }
+        }
+      }
     }
   });
-}, 60000);
+  count++;
+  if(count == 60){
+    count = 0;
+    console.log(status_nomal);
+    console.log(status_simple);
+    var clearsql = 'DELETE FROM traffic';
+    db.query(clearsql, function (error, results) {
+      if (error) {
+        status = "err";
+        console.log("err");
+      }
+      else  {
+        console.log("success delete");
+      }
+    });
+  }
+}, 10000);
 
 
 module.exports = router;
