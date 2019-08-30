@@ -99,14 +99,7 @@ var clear = setInterval(() => {
           }
         }
       }
-    }
-  });
-  count++;
-  if(count == 60){
-    count = 0;
-    console.log(status_nomal);
-    console.log(status_simple);
-    var clearsql = 'DELETE FROM traffic';
+      var clearsql = 'DELETE FROM traffic';
     db.query(clearsql, function (error, results) {
       if (error) {
         status = "err";
@@ -116,6 +109,18 @@ var clear = setInterval(() => {
         console.log("success delete");
       }
     });
+    }
+  });
+  count++;
+  if(count == 60){
+    count = 0;
+    console.log(status_nomal);
+    console.log(status_simple);
+    traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    traffic_simple = [0,0];
+    status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    console.log(status_nomal);
+    console.log(status_simple);
   }
 }, 10000);
 
