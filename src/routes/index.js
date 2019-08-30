@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/test', (req, res)=> {
-  var selectsql = 'SELECT * FROM `signal_data` ORDER BY signal_idx DESC';
+  var selectsql = 'SELECT * FROM `signal_data` ORDER BY idx DESC';
   db.query(selectsql, function (error, results) {
     if (error) {
       status = "err";
