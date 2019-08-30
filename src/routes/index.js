@@ -10,6 +10,15 @@ var cookieParser = require('cookie-parser');
 
 const router = Router();
 
+db.connect((err)=>{
+  if(err){
+    console.log(err);
+  }
+  else{
+    console.log("success");
+  }
+});
+
 /* GET index page. */
 router.get('/', (req, res) => {
   res.render('index', {
