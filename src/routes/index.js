@@ -88,7 +88,7 @@ var clear = setInterval(() => {
       }else{
         var i = 0;
         for(i = 0; i < results.length; i++){
-          var point = results[i].traffic_x + results[i].traffic_y*7;
+          var point = results[i].traffic_y + results[i].traffic_x*7;
           traffic_normal[point]++;
           if(status_normal[point] == 1){
             traffic_simple[0]++;
