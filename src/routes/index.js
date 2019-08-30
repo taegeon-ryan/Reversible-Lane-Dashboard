@@ -70,7 +70,7 @@ var insert = setInterval(() => {
       console.log("insert success");
     }
   });
-}, 1000);
+}, 100);
 
 var count = 0;
 var traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -112,7 +112,7 @@ var clear = setInterval(() => {
     }
   });
   count++;
-  if(count == 60){
+  if(count == 6){
     count = 0;
     console.log(status_nomal);
     console.log(status_simple);
@@ -122,7 +122,7 @@ var clear = setInterval(() => {
     console.log(status_nomal);
     console.log(status_simple);
   }
-}, 10000);
+}, 1000);
 
 
 module.exports = router;
