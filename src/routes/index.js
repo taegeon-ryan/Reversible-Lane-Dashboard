@@ -54,4 +54,42 @@ router.post('/upload_signal', (req, res) =>{
 
 });
 
+var traffic = [0,0,0];
+var test_x = 1;
+var test_y = 2;
+
+setTimeout(() => {
+  var insertsql = 'INSERT INTO traffic (traffic_x, traffic_y) VALUES (? , ?)';
+
+  db.query(insertsql,[test_x, test_y] ,function (error, results) {
+    if (error) {
+      status = "err";
+      console.log("err");
+    }
+    else  {
+      console.log("insert success");
+    }
+  });
+  test_x = test_x + 1;
+  test_y = test_y + 2;
+}, 1000);
+
+setTimeout(() => {
+  var clearsql = 'DELETE FROM traffic';
+  db.query(clearsql, function (error, results) {
+    if (error) {
+      status = "err";
+      console.log("err");
+    }
+    else  {
+      if(!results[0]){
+        console.log("no");
+      }else{
+        console.log(results);
+      }
+    }
+  });
+}, 60000);
+
+
 module.exports = router;
