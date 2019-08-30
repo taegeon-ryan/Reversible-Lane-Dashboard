@@ -78,7 +78,7 @@ var traffic_simple = [0,0];
 var status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 var clear = setInterval(() => {
-  var selectsql = 'SELECT * FROM traffic ORDER BY DESC';
+  var selectsql = 'SELECT * FROM traffic ORDER BY idx DESC';
   db.query(selectsql, (error, results)=>{
     if(error) {
       console.log("error");
