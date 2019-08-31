@@ -28,9 +28,13 @@
         message = "도시방면 차로를 "+algo_data%10+"차로로 조정하세요.";
       }else if(algo_data/10 == 2){
         message = "시골방면 차로를 "+algo_data%10+"차로로 조정하세요.";
-      }else{
+      }else if(algo_data == 0){
         message = "현재 차로 조정 중입니다. 차로 현황을 주시하세요.";
+      }else {
+        message = "현재 차량 흐름이 크게 차이나지 않습니다. 차로 현황을 주시하세요.";
       }
+      var echo_traffic = traffic.split('');
+      var echo_signal = signal.split('');
     %>
   </head>
   <body>
@@ -75,317 +79,58 @@
           height="384px"
           class="road-image"
         />
-        <div class="asc-way">
-          <div id="way1-left" class="way">
-            <i class="fas fa-arrow-left way-icon"></i>
-          </div>
-          <div id="way2-left" class="way">
-            <i class="fas fa-arrow-left way-icon"></i>
-          </div>
-          <div id="way3-left" class="way">
-            <i class="fas fa-arrow-left way-icon"></i>
-          </div>
-          <div id="way4-left" class="way">
-            <i class="fas fa-arrow-left way-icon"></i>
-          </div>
-          <div id="way5-left" class="way">
-            <i class="fas fa-arrow-left way-icon"></i>
-          </div>
-        </div>
-        <div class="desc-way">
-          <div id="way1-right" class="way">
-            <i class="fas fa-arrow-right way-icon"></i>
-          </div>
-          <div id="way2-right" class="way">
-            <i class="fas fa-arrow-right way-icon"></i>
-          </div>
-          <div id="way3-right" class="way">
-            <i class="fas fa-arrow-right way-icon"></i>
-          </div>
-          <div id="way4-right" class="way">
-            <i class="fas fa-arrow-right way-icon"></i>
-          </div>
-          <div id="way5-right" class="way">
-            <i class="fas fa-arrow-right way-icon"></i>
-          </div>
-        </div>
         <div class="led-cross">
-          <div id="led_1_1" class="led">
-            <img
-              id="led-1-1"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_1_2" class="led">
-            <img
-              id="led-1-2"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_1_3" class="led">
-            <img
-              id="led-1-3"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_1_4" class="led">
-            <img
-              id="led-1-4"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_1_5" class="led">
-            <img
-              id="led-1-5"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_1_6" class="led">
-            <img
-              id="led-1-6"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_1_7" class="led">
-            <img
-              id="led-1-7"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_2_1" class="led">
-            <img
-              id="led-2-1"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_2_2" class="led">
-            <img
-              id="led-2-2"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_2_3" class="led">
-            <img
-              id="led-2-3"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_2_4" class="led">
-            <img
-              id="led-2-4"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_2_5" class="led">
-            <img
-              id="led-2-5"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_2_6" class="led">
-            <img
-              id="led-2-6"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_2_7" class="led">
-            <img
-              id="led-2-7"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_3_1" class="led">
-            <img
-              id="led-3-1"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_3_2" class="led">
-            <img
-              id="led-3-2"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_3_3" class="led">
-            <img
-              id="led-3-3"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_3_4" class="led">
-            <img
-              id="led-3-4"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_3_5" class="led">
-            <img
-              id="led-3-5"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_3_6" class="led">
-            <img
-              id="led-3-6"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
-          <div id="led_3_7" class="led">
-            <img
-              id="led-3-7"
-              class="led_cross"
-              src="/images/led-0.png"
-            />
-          </div>
+            <%
+            var x = 1, y  = 0;
+            var i = 0;
+            for(i = 0; i < 21; i++){
+              var traffic;
+              %>
+              <div id="led_<%=x%>_<%=y%7+1%>" class="led">
+                  <img
+                    id="led-1-1"
+                    class="led_cross"
+                    src="/images/led-<%=echo_traffic[i]%>.png"
+                  />
+                </div>
+              <%
+              x++; y++;
+            }
+          %>
         </div>
         <div class="traffic-light">
-          <div id="light_1_1_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_1_1_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_1_2_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_1_2_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_1_3_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_1_3_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_1_4_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_1_4_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_1_5_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_1_5_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_1_6_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_1_6_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_1_7_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_1_7_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_2_1_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_2_1_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_2_2_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_2_2_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_2_3_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_2_3_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_2_4_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_2_4_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_2_5_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_2_5_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_2_6_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_2_6_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_2_7_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_2_7_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_3_1_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_3_1_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_3_2_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_3_2_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_3_3_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_3_3_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_3_4_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_3_4_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_3_5_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_3_5_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_3_6_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_3_6_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-          <div id="light_3_7_1" class="light">
-            <i class="fas fa-arrow-right light-icon" style="color:#51cf66"></i>
-          </div>
-          <div id="light_3_7_2" class="light">
-            <i class="fas fa-times light-icon" style="color:#e82828"></i>
-          </div>
-        </div>
+            <%
+            var x = 1, y  = 0;
+            var i = 0;
+            for(i = 0; i < 21; i++){
+              var traffic;
+              if(echo_signal[i] == 1){
+                var si_1_mes = "arrow-right";
+                var si_2_mes = "times";
+                var si_1 = "51cf66";
+                var si_2 = "e82828";
+              }else if(echo_signal[i] == 2){
+                var si_1_mes = "times";
+                var si_2_mes = "arrow-left";
+                var si_1 = "e82828";
+                var si_2 = "51cf66";
+              }else if(echo_signal[i] == 3){
+                var si_1_mes = "times";
+                var si_2_mes = "times";
+                var si_1 = "e82828";
+                var si_2 = "e82828";
+              }
+              %>
+              <div id="light_<%=x%>_<%=y%7+1%>_1" class="light">
+                <i class="fas fa-<%=si_1_mes%> light-icon" style="color:#<%=si_1%>"></i>
+              </div>
+              <div id="light_<%=x%>_<%=y%7+1%>_2" class="light">
+                <i class="fas fa-<%=si_2_mes%> light-icon" style="color:#<%=si_2%>"></i>
+              </div>
+              <%
+              x++; y++;
+            }
+          %>
         <div class="desc-traffic">
           <div class="desc-direction">
             <h6 class="direction-name">도시<br />방면</h6>
