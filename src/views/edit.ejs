@@ -99,6 +99,7 @@
                     id="led-1-1"
                     class="led_cross"
                     src="/images/led-<%=echo_traffic[i]%>.png"
+                    onclick="toggleLED(this.id);"
                   />
                 </div>
               <%
@@ -130,10 +131,12 @@
               }
               
               %>
-              <div id="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_1" class="light">
+              <div id="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_1" class="light" onclick="toggleLeftLight(this.id)"
+                style="cursor:pointer">
                 <i class="fas fa-<%=si_1_mes%> light-icon" style="color:#<%=si_1%>"></i>
               </div>
-              <div id="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_2" class="light">
+              <div id="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_2" class="light" onclick="toggleLeftLight(this.id)"
+                style="cursor:pointer">
                 <i class="fas fa-<%=si_2_mes%> light-icon" style="color:#<%=si_2%>"></i>
               </div>
               <%
