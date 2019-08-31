@@ -19,6 +19,8 @@ db.connect((err)=>{
   }
 });
 
+router.use(express.static(path.join(__dirname, 'public')));
+
 /* GET index page. */
 router.get('/', (req, res) => {
   var selectsql = 'SELECT * FROM `signal_data` ORDER BY idx DESC';
