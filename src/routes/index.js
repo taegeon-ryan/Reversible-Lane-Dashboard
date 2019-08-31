@@ -8,6 +8,7 @@ var dbconfig = require('../config/dbconfig');
 var db = mysql.createConnection(dbconfig);
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+const path = require('path');
 
 const router = Router();
 
