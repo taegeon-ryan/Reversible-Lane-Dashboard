@@ -24,6 +24,10 @@ router.get('/', (req, res) => {
   res.render('home');
 });
 
+router.get('/edit', (req, res) =>{
+  res.render('edit');
+});
+
 router.get('/test', (req, res)=> {
   var selectsql = 'SELECT * FROM `signal_data` ORDER BY idx DESC';
   db.query(selectsql, function (error, results) {
