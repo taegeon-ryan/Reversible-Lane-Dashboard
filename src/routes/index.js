@@ -21,14 +21,6 @@ db.connect((err)=>{
 
 /* GET index page. */
 router.get('/', (req, res) => {
-  res.render('home');
-});
-
-router.get('/edit', (req, res) =>{
-  res.render('edit');
-});
-
-router.get('/test', (req, res)=> {
   var selectsql = 'SELECT * FROM `signal_data` ORDER BY idx DESC';
   db.query(selectsql, function (error, results) {
     if (error) {
@@ -39,13 +31,24 @@ router.get('/test', (req, res)=> {
       if(!results[0]){
         console.log("no");
       }else{
-        console.log(results);
+        var traffic_data = results[0].input_data;
+        var selectsql = 'SELECT * FROM `traffic_data` ORDER BY idx DESC';
+        db.query(selectsql, function(error, results){
+          if(error){
+            status = "err";
+            console.log("err");
+          }else{
+            var signal_data = results[0].input_data;
+            res.render('home', {traffic : traffic_data, signal: signal_data, algo_data : algo_data});
+          }
+        });
       }
     }
-    res.render('index',{
-      title: 'Express'
-    });
   });
+});
+
+router.get('/edit', (req, res) =>{
+  res.render('edit');
 });
 
 router.post('/upload_traffic',(req, res)=>{
@@ -113,7 +116,7 @@ router.get('/download_traffic',(req, res)=>{
         console.log(results);
         console.log(results[0]);
         var send_data = results[0].input_data;
-        res.send(send_data);
+        res.send("T"+send_data);
       }
     });
 });
@@ -149,31 +152,16 @@ router.post('/upload_signal', (req, res)=>{
   }
 });
 
-var traffic = [0,0,0];
-var test_x = 1;
-var test_y = 2;
-
-// var insert = setInterval(() => {
-//   var insertsql = 'INSERT INTO traffic (traffic_x, traffic_y) VALUES (? , ?)';
-
-//   db.query(insertsql,[test_x, test_y] ,function (error, results) {
-//     if (error) {
-//       status = "err";
-//       console.log("err");
-//     }
-//     else  {
-//       console.log("insert success");
-//     }
-//   });
-// }, 100);
-
 var count = 0;
-var traffic_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var traffic_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var traffic_simple = [0,0];
-var status_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var status_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var algo_data;
+var status_badak = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 var now_status = setInterval(()=>{
   var selectsql = 'SELECT * FROM signal_data ORDER BY idx DESC LIMIT 1';
+  var traffic_data_selectsql = 'SELECT * FROM traffic_data ORDER BY idx DESC LIMIT 1';
   db.query(selectsql, (error, results)=>{
     if(error) {
       console.log("error");
@@ -189,8 +177,22 @@ var now_status = setInterval(()=>{
         console.log("now status loaded");
       }
     }
+  }
+  );
+  db.query(traffic_data_selectsql, (error, results)=>{
+       if(error){
+         console.log("error");
+       }else{
+          var i = 0;
+          var result_array = results[0].input_data.split('');
+          for(i = 0; i < 21; i++){
+            status_badak = result_array[i];
+          }
+          console.log("badak now status loaded");
+       }
   });
 }, 500);
+
 
 var clear = setInterval(() => {
   var selectsql = 'SELECT * FROM traffic ORDER BY idx DESC';
@@ -232,9 +234,9 @@ var clear = setInterval(() => {
     // console.log(status_normal);
     console.log(traffic_normal);
     // console.log(traffic_simple);
-    traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     traffic_simple = [0,0];
-    status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   }
 }, 1000);
 

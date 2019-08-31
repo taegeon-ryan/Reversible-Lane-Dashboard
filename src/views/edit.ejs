@@ -22,6 +22,22 @@
       window.onload = function() {
         changeColor();
       };
+      function jeokdragon(){
+        var hooo = confirm('적용하시겠습니까? [확인]을 누르시면 바로 반영됩니다.');
+            if(hooo){
+              window.location.href='/edit_proc';
+            }else{
+              
+            }
+      };
+      function cannnn(){
+        var dae = confirm('취소하시겠습니까?');
+        if(hooo){
+          window.location.href='/edit';
+        }else{
+
+        }
+      }
     </script>
   </head>
   <body>
@@ -618,7 +634,7 @@
         <a href="#"
           ><button
             class="apply"
-            onclick="alert('적용하시겠습니까? [확인]을 누르시면 바로 반영됩니다.')"
+            onclick="jeokdragon();"
           >
             <p id="button-name-apply">적용</p>
           </button></a
@@ -626,7 +642,7 @@
         <a href="/edit"
           ><button
             class="cancel"
-            onclick="alert('취소하시겠습니까? 차로 변경 페이지로 다시 돌아갑니다.')"
+            onclick="cannnn();"
           >
             <p id="button-name-cancel">취소</p>
           </button></a
