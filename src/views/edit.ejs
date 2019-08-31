@@ -97,7 +97,7 @@
               <div id="led_<%=parseInt(y/7)+1%>_<%=y%7+1%>" class="led">
                   <input
                   type="image"
-                    id="led-1-1"
+                    id="led-<%=parseInt(y/7)+1%>-<%=y%7+1%>"
                     class="led_cross"
                     src="/images/led-<%=echo_traffic[i]%>.png"
                     onclick="toggleLED(this.id);"
