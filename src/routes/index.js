@@ -111,7 +111,7 @@ router.get('/download_traffic',(req, res)=>{
         console.log(results);
         console.log(results[0]);
         var send_data = results[0].input_data;
-        res.send(resend_datasults);
+        res.send(send_data);
       }
     });
 });
