@@ -101,6 +101,38 @@ router.post('/upload_live', (req, res) =>{
   });
 });
 
+router.get('/download_traffic',(req, res)=>{
+    var selectsql = 'SELECT * FROM traffic_data LIMIT 1';
+    db.query(selectsql, (error, results)=>{
+      if (error) {
+        res.send({code : 4});
+      }
+      else  {
+        res.send(result[0].traffic_data);
+      }
+    });
+});
+
+router.post('/upload_signal', (req, res)=>{
+  if(req.body.signal){
+    var selectsql = 'SELECT * FROM traffic_data LIMIT 1';
+
+    db.query(insertsql, [req.body.signal], (error, results)=>{
+      if (error) {
+        status = "err";
+        console.log("ARDUINO signal err");
+        res.send({code : 4});
+      }
+      else  {
+        console.log("ARDUINO signal success");
+        res.send({code : 1});
+      }
+    });
+  }else {
+    res.send({code : 2});
+  }
+});
+
 var traffic = [0,0,0];
 var test_x = 1;
 var test_y = 2;
@@ -184,9 +216,9 @@ var clear = setInterval(() => {
     // console.log(status_normal);
     console.log(traffic_normal);
     // console.log(traffic_simple);
-    traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     traffic_simple = [0,0];
-    status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
   }
 }, 1000);
 
