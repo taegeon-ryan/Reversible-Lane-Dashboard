@@ -118,6 +118,10 @@ router.post('/upload_signal', (req, res)=>{
   }
 });
 
+router.post('/edit_proc', (req, res)=>{
+  console.log(req.body);
+});
+
 router.post('/upload_live', (req, res) =>{
   var insertsql = 'INSERT INTO traffic (traffic_x, traffic_y) VALUES (? , ?)';
   db.query(insertsql,[req.body.x, req.body.y] ,function (error, results) {
