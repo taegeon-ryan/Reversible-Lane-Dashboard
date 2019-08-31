@@ -1,12 +1,14 @@
 const { Router } = require('express');
 var mysql = require('mysql');
 const session = require('express-session');
+const express = require('express');
 var crypto = require('crypto');
 var MySQLStore = require('express-mysql-session')(session);
 var dbconfig = require('../config/dbconfig');
 var db = mysql.createConnection(dbconfig);
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+const path = require('path');
 
 const router = Router();
 
@@ -18,6 +20,8 @@ db.connect((err)=>{
     console.log("success");
   }
 });
+
+router.use(express.static(path.join(__dirname, 'public')));
 
 /* GET index page. */
 router.get('/', (req, res) => {
@@ -39,7 +43,7 @@ router.get('/', (req, res) => {
             console.log("err");
           }else{
             var signal_data = results[0].input_data;
-            res.render('home', {traffic : traffic_data, signal: signal_data, algo_data : algo_data});
+            res.render('home', {traffic : signal_data, signal: traffic_data , algo_data : algo_data});
           }
         });
       }
@@ -48,7 +52,30 @@ router.get('/', (req, res) => {
 });
 
 router.get('/edit', (req, res) =>{
-  res.render('edit');
+  var selectsql = 'SELECT * FROM `signal_data` ORDER BY idx DESC';
+  db.query(selectsql, function (error, results) {
+    if (error) {
+      status = "err";
+      console.log("err");
+    }
+    else  {
+      if(!results[0]){
+        console.log("no");
+      }else{
+        var traffic_data = results[0].input_data;
+        var selectsql = 'SELECT * FROM `traffic_data` ORDER BY idx DESC';
+        db.query(selectsql, function(error, results){
+          if(error){
+            status = "err";
+            console.log("err");
+          }else{
+            var signal_data = results[0].input_data;
+            res.render('edit', {traffic : signal_data, signal: traffic_data , algo_data : algo_data});
+          }
+        });
+      }
+    }
+  });
 });
 
 router.post('/upload_traffic',(req, res)=>{
@@ -91,6 +118,10 @@ router.post('/upload_signal', (req, res)=>{
   }
 });
 
+router.post('/edit_proc', (req, res)=>{
+  console.log(req.body);
+});
+
 router.post('/upload_live', (req, res) =>{
   var insertsql = 'INSERT INTO traffic (traffic_x, traffic_y) VALUES (? , ?)';
   db.query(insertsql,[req.body.x, req.body.y] ,function (error, results) {
@@ -116,7 +147,7 @@ router.get('/download_traffic',(req, res)=>{
         console.log(results);
         console.log(results[0]);
         var send_data = results[0].input_data;
-        res.send("T"+send_data);
+        res.send("TWICE"+send_data);
       }
     });
 });
@@ -158,6 +189,7 @@ var traffic_simple = [0,0];
 var status_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var algo_data;
 var status_badak = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var status_flag = [0,0,0];
 
 var now_status = setInterval(()=>{
   var selectsql = 'SELECT * FROM signal_data ORDER BY idx DESC LIMIT 1';
@@ -193,6 +225,33 @@ var now_status = setInterval(()=>{
   });
 }, 500);
 
+var algo = setInterval(()=>{
+  algo_data = -1;
+  var check = 2015;
+  if(traffic_simple[0] - 10 > traffic_simple[1]){
+    check = 0;
+    while(check < 3){
+      if(status_flag[check] == 1){
+        check++;
+      }else if(status_flag[check] == 0){
+        algo_data = 0;
+      }else{
+        algo_data = 10+check;
+      }
+    }
+  }else if(traffic_simple[1] - 10 > traffic_simple[0]){
+    check = 2;
+    while(check >= 0){
+      if(status_flag[check] == 2){
+        check--;
+      }else if(status_flag[check] == 0){
+        algo_data = 0;
+      }else{
+        algo_data = 20+check;
+      }
+    }
+  }
+});
 
 var clear = setInterval(() => {
   var selectsql = 'SELECT * FROM traffic ORDER BY idx DESC';
