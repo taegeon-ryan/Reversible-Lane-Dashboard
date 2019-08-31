@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>도로 현황</title>
+    <link rel="stylesheet" href="../public/stylesheets/home.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"
+    />
+    <script src="../public/javascripts/traffic_count.js"></script>
+    <style>
+      body {
+        font-family: 'NanumSquare', sans-serif;
+        font-weight: 800;
+      }
+    </style>
+    <script src="https://kit.fontawesome.com/88970fe683.js"></script>
+    <script>
+      window.onload = function() {
+        changeColor();
+      };
+    </script>
+  </head>
+  <body>
+    <nav class="sidebar-container">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h3 class="sidebar-title">가변차로<br />대시보드</h3>
+          <hr class="sidebar-line" />
+        </div>
+        <ul class="sidebar-list">
+          <li>
+            <i class="fas fa-road list-icon active"></i>
+            <a href="#" class="list-name active">도로 현황</a>
+          </li>
+          <li>
+            <i class="fas fa-flag list-icon"></i>
+            <a href="#" class="list-name">차로 변경</a>
+          </li>
+          <li>
+            <i class="fas fa-stream list-icon"></i>
+            <a href="#" class="list-name">변경 내역</a>
+          </li>
+          <li>
+            <i class="fas fa-sign-out-alt list-icon"></i>
+            <a href="#" class="list-name">로그아웃</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <h1 class="title">도로 현황</h1>
+      <div class="road-box">
+        <div class="asc-traffic">
+          <div class="sum" id="asc-sum"><p class="count">87대</p></div>
+          <div class="first-section" id="asc-1"><p class="count">18대</p></div>
+          <div class="second-section" id="asc-2"><p class="count">22대</p></div>
+          <div class="third-section" id="asc-3"><p class="count">13대</p></div>
+          <div class="fourth-section" id="asc-4"><p class="count">4대</p></div>
+          <div class="fifth-section" id="asc-5"><p class="count">7대</p></div>
+          <div class="sixth-section" id="asc-6"><p class="count">11대</p></div>
+          <div class="seventh-section" id="asc-7"><p class="count">4대</p></div>
+          <div class="eighth-section" id="asc-8"><p class="count">8대</p></div>
+          <div class="asc-direction">
+            <h6 class="direction-name">시골<br />방면</h6>
+          </div>
+        </div>
+        <img
+          src="../public/images/road_image_empty.jpg"
+          width="1150px"
+          height="384px"
+          class="road-image"
+        />
+        <div class="led-cross">
+          <div id="led_1_1" class="led">
+            <img
+              id="led-1-1"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_1_2" class="led">
+            <img
+              id="led-1-2"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_1_3" class="led">
+            <img
+              id="led-1-3"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_1_4" class="led">
+            <img
+              id="led-1-4"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_1_5" class="led">
+            <img
+              id="led-1-5"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_1_6" class="led">
+            <img
+              id="led-1-6"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_1_7" class="led">
+            <img
+              id="led-1-7"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_2_1" class="led">
+            <img
+              id="led-2-1"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_2_2" class="led">
+            <img
+              id="led-2-2"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_2_3" class="led">
+            <img
+              id="led-2-3"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_2_4" class="led">
+            <img
+              id="led-2-4"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_2_5" class="led">
+            <img
+              id="led-2-5"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_2_6" class="led">
+            <img
+              id="led-2-6"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_2_7" class="led">
+            <img
+              id="led-2-7"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_3_1" class="led">
+            <img
+              id="led-3-1"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_3_2" class="led">
+            <img
+              id="led-3-2"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_3_3" class="led">
+            <img
+              id="led-3-3"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_3_4" class="led">
+            <img
+              id="led-3-4"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_3_5" class="led">
+            <img
+              id="led-3-5"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_3_6" class="led">
+            <img
+              id="led-3-6"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+          <div id="led_3_7" class="led">
+            <img
+              id="led-3-7"
+              class="led_cross"
+              src="../public/images/led-0.png"
+            />
+          </div>
+        </div>
+        <div class="desc-traffic">
+          <div class="desc-direction">
+            <h6 class="direction-name">도시<br />방면</h6>
+          </div>
+          <div class="first-section" id="desc-1"><p class="count">3대</p></div>
+          <div class="second-section" id="desc-2"><p class="count">5대</p></div>
+          <div class="third-section" id="desc-3"><p class="count">5대</p></div>
+          <div class="fourth-section" id="desc-4"><p class="count">1대</p></div>
+          <div class="fifth-section" id="desc-5"><p class="count">4대</p></div>
+          <div class="sixth-section" id="desc-6"><p class="count">10대</p></div>
+          <div class="seventh-section" id="desc-7">
+            <p class="count">5대</p>
+          </div>
+          <div class="eighth-section" id="desc-8">
+            <p class="count">13대</p>
+          </div>
+          <div class="sum" id="desc-sum"><p class="count">46대</p></div>
+        </div>
+      </div>
+      <h3 class="subtitle">추천</h3>
+      <div class="recommend-box">
+        <p>도시 방면 차로를 4차로로 조정하세요.</p>
+      </div>
+    </div>
+  </body>
+</html>
