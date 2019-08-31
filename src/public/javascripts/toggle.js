@@ -1,13 +1,13 @@
 function toggleLED(id) {
   var state = document.getElementById(id);
   if (state.src.match('led-0')) {
-    state.src = '../public/images/led-1.png';
+    state.src = '/images/led-1.png';
   } else if (state.src.match('led-1')) {
-    state.src = '../public/images/led-2.png';
+    state.src = '/images/led-2.png';
   } else if (state.src.match('led-2')) {
-    state.src = '../public/images/led-3.png';
+    state.src = '/images/led-3.png';
   } else {
-    state.src = '../public/images/led-0.png';
+    state.src = '/images/led-0.png';
   }
 }
 
