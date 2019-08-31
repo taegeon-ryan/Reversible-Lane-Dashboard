@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
             console.log("err");
           }else{
             var signal_data = results[0].input_data;
-            res.render('home', {traffic : signal_data, signal: traffic_data , algo_data : algo_data});
+            res.render('edit', {traffic : signal_data, signal: traffic_data , algo_data : algo_data});
           }
         });
       }
@@ -48,7 +48,30 @@ router.get('/', (req, res) => {
 });
 
 router.get('/edit', (req, res) =>{
-  res.render('edit');
+  var selectsql = 'SELECT * FROM `signal_data` ORDER BY idx DESC';
+  db.query(selectsql, function (error, results) {
+    if (error) {
+      status = "err";
+      console.log("err");
+    }
+    else  {
+      if(!results[0]){
+        console.log("no");
+      }else{
+        var traffic_data = results[0].input_data;
+        var selectsql = 'SELECT * FROM `traffic_data` ORDER BY idx DESC';
+        db.query(selectsql, function(error, results){
+          if(error){
+            status = "err";
+            console.log("err");
+          }else{
+            var signal_data = results[0].input_data;
+            res.render('home', {traffic : signal_data, signal: traffic_data , algo_data : algo_data});
+          }
+        });
+      }
+    }
+  });
 });
 
 router.post('/upload_traffic',(req, res)=>{
