@@ -46,31 +46,78 @@ router.get('/test', (req, res)=> {
   });
 });
 
-router.post('/upload_live',(req, res)=>{
-  
+router.post('/upload_traffic',(req, res)=>{
+  if(req.body.traffic){
+    var insertsql = 'INSERT INTO traffic_data (traffic_data) VALUES (?)';
+
+    db.query(insertsql, [req.body.traffic], (error, results)=>{
+      if (error) {
+        status = "err";
+        console.log("ARDUINO traffic err");
+        res.send({code : 4});
+      }
+      else  {
+        console.log("ARDUINO traffic success");
+        res.send({code : 1});
+      }
+    });
+  }else {
+    res.send({code : 2});
+  }
 });
 
-router.post('/upload_signal', (req, res) =>{
+router.post('/upload_signal', (req, res)=>{
+  if(req.body.signal){
+    var insertsql = 'INSERT INTO signal_data (input_data) VALUES (?)';
 
+    db.query(insertsql, [req.body.signal], (error, results)=>{
+      if (error) {
+        status = "err";
+        console.log("ARDUINO signal err");
+        res.send({code : 4});
+      }
+      else  {
+        console.log("ARDUINO signal success");
+        res.send({code : 1});
+      }
+    });
+  }else {
+    res.send({code : 2});
+  }
+});
+
+router.post('/upload_live', (req, res) =>{
+  var insertsql = 'INSERT INTO traffic (traffic_x, traffic_y) VALUES (? , ?)';
+  db.query(insertsql,[req.body.x, req.body.y] ,function (error, results) {
+    if (error) {
+      status = "err";
+      console.log("err");
+      res.send({code : 4});
+    }
+    else  {
+      console.log("insert success");
+      res.send({code : 1});
+    }
+  });
 });
 
 var traffic = [0,0,0];
 var test_x = 1;
 var test_y = 2;
 
-var insert = setInterval(() => {
-  var insertsql = 'INSERT INTO traffic (traffic_x, traffic_y) VALUES (? , ?)';
+// var insert = setInterval(() => {
+//   var insertsql = 'INSERT INTO traffic (traffic_x, traffic_y) VALUES (? , ?)';
 
-  db.query(insertsql,[test_x, test_y] ,function (error, results) {
-    if (error) {
-      status = "err";
-      console.log("err");
-    }
-    else  {
-      console.log("insert success");
-    }
-  });
-}, 100);
+//   db.query(insertsql,[test_x, test_y] ,function (error, results) {
+//     if (error) {
+//       status = "err";
+//       console.log("err");
+//     }
+//     else  {
+//       console.log("insert success");
+//     }
+//   });
+// }, 100);
 
 var count = 0;
 var traffic_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
