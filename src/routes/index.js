@@ -21,9 +21,7 @@ db.connect((err)=>{
 
 /* GET index page. */
 router.get('/', (req, res) => {
-  res.render('index', {
-    title: 'Express'
-  });
+  res.render('home');
 });
 
 router.get('/test', (req, res)=> {
