@@ -108,9 +108,21 @@ router.get('/download_traffic',(req, res)=>{
         res.send({code : 4});
       }
       else  {
-        res.send(results[0].traffic_data);
+        console.log(results);
+        console.log(results[0]);
       }
     });
+});
+
+var selectsql = 'SELECT * FROM traffic_data LIMIT 1';
+db.query(selectsql, (error, results)=>{
+  if (error) {
+    res.send({code : 4});
+  }
+  else  {
+    console.log(results);
+    console.log(results[0]);
+  }
 });
 
 router.post('/upload_signal', (req, res)=>{
