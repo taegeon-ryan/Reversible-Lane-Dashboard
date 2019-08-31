@@ -181,15 +181,12 @@ var clear = setInterval(() => {
   count++;
   if(count == 6){
     count = 0;
-    console.log(status_normal);
+    // console.log(status_normal);
     console.log(traffic_normal);
-    console.log(traffic_simple);
+    // console.log(traffic_simple);
     traffic_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     traffic_simple = [0,0];
     status_nomal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    console.log(status_normal);
-    console.log(traffic_normal);
-    console.log(traffic_simple);
   }
 }, 1000);
 
