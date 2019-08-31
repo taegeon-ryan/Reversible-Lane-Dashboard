@@ -108,7 +108,7 @@ router.get('/download_traffic',(req, res)=>{
         res.send({code : 4});
       }
       else  {
-        res.send(result[0].traffic_data);
+        res.send(results[0].traffic_data);
       }
     });
 });
