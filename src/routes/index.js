@@ -116,7 +116,7 @@ router.get('/download_traffic',(req, res)=>{
         console.log(results);
         console.log(results[0]);
         var send_data = results[0].input_data;
-        res.send("T"+send_data);
+        res.send("TWICE"+send_data);
       }
     });
 });
@@ -158,6 +158,7 @@ var traffic_simple = [0,0];
 var status_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var algo_data;
 var status_badak = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var status_flag = [0,0,0];
 
 var now_status = setInterval(()=>{
   var selectsql = 'SELECT * FROM signal_data ORDER BY idx DESC LIMIT 1';
@@ -193,6 +194,33 @@ var now_status = setInterval(()=>{
   });
 }, 500);
 
+var algo = setInterval(()=>{
+  algo_data = -1;
+  var check = 2015;
+  if(traffic_simple[0] - 10 > traffic_simple[1]){
+    check = 0;
+    while(check < 3){
+      if(status_flag[check] == 1){
+        check++;
+      }else if(status_flag[check] == 0){
+        algo_data = 0;
+      }else{
+        algo_data = 10+check;
+      }
+    }
+  }else if(traffic_simple[1] - 10 > traffic_simple[0]){
+    check = 2;
+    while(check >= 0){
+      if(status_flag[check] == 2){
+        check--;
+      }else if(status_flag[check] == 0){
+        algo_data = 0;
+      }else{
+        algo_data = 20+check;
+      }
+    }
+  }
+});
 
 var clear = setInterval(() => {
   var selectsql = 'SELECT * FROM traffic ORDER BY idx DESC';

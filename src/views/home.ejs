@@ -22,6 +22,16 @@
         changeColor();
       };
     </script>
+    <% 
+      var message;
+      if(algo_data/10 == 1){
+        message = "도시방면 차로를 "+algo_data%10+"차로로 조정하세요.";
+      }else if(algo_data/10 == 2){
+        message = "시골방면 차로를 "+algo_data%10+"차로로 조정하세요.";
+      }else{
+        message = "현재 차로 조정 중입니다. 차로 현황을 주시하세요.";
+      }
+    %>
   </head>
   <body>
     <nav class="sidebar-container">
@@ -398,7 +408,7 @@
       <h3 class="subtitle">추천</h3>
       <a href="#">
         <div class="recommend-box">
-          <p class="recommended">도시 방면 차로를 4차로로 조정하세요.</p>
+          <p class="recommended"><%=message%></p>
         </div>
       </a>
     </div>
