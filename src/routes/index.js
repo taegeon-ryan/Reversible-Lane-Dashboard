@@ -110,6 +110,7 @@ router.get('/download_traffic',(req, res)=>{
       else  {
         console.log(results);
         console.log(results[0]);
+        res.send(results);
       }
     });
 });
