@@ -35,6 +35,53 @@
         }
       }
     </script>
+    <script>
+      function toggleLED(id) {
+        var state = document.getElementById(id);
+        var id_2nd = id.replace('-','_');
+        var state_2nd = document.getElementById(id_2nd);
+        if (state.src.match('led-0')) {
+          state.src = '/images/led-1.png';
+          state_2nd.value = 1;
+        } else if (state.src.match('led-1')) {
+          state.src = '/images/led-2.png';
+          state_2nd.value = 2;
+        } else if (state.src.match('led-2')) {
+          state.src = '/images/led-3.png';
+          state_2nd.value = 3;
+        } else {
+          state.src = '/images/led-0.png';
+          state_2nd.value = 0;
+        }
+      }
+
+      function toggleLeftLight(id) {
+        var parent = document.getElementById(id);
+        var light = parent.children[0];
+        if (light.className.match('arrow-left')) {
+          light.className = 'fas fa-times light-icon';
+          light.style = 'color:#e82828';
+          test = 0;
+        } else {
+          light.className = 'fas fa-arrow-left light-icon';
+          light.style = 'color:#51cf66';
+          test = 1;
+        }
+      }
+
+      function toggleRightLight(id) {
+        var parent = document.getElementById(id);
+        var light = parent.children[0];
+        if (light.className.match('arrow-right')) {
+          light.className = 'fas fa-times light-icon';
+          light.style = 'color:#e82828';
+        } else {
+          light.className = 'fas fa-arrow-right light-icon';
+          light.style = 'color:#51cf66';
+        }
+      }
+
+    </script>
     <% 
       var message;
       if(algo_data/10 == 1){
@@ -91,15 +138,17 @@
             for(i = 0; i < 21; i++){
               %>
               <div id="led_<%=parseInt(y/7)+1%>_<%=y%7+1%>" class="led">
-                  <input
-                    type="image"
-                    id="led-<%=parseInt(y/7)+1%>-<%=y%7+1%>"
-                    name="led-<%=parseInt(y/7)+1%>-<%=y%7+1%>"
+                  <img
+                    id="led-<%=parseInt(y/7)+1%>-<%=y%7+1%>" 
                     class="led_cross"
                     src="/images/led-<%=echo_traffic[i]%>.png"
                     onclick="toggleLED(this.id);return false;"
-                    value="<%=echo_traffic[i]%>"
                   />
+                  <input type="text" 
+                  id="led_<%=parseInt(y/7)+1%>_<%=y%7+1%>" 
+                  style="display:none;" 
+                  name="led_<%=parseInt(y/7)+1%>_<%=y%7+1%>" 
+                  value="<%=echo_traffic[i]%>">
                 </div>
               <%
               y++;
@@ -139,10 +188,12 @@
               <div id="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_1" class="light" onclick="toggleLeftLight(this.id)"
                 style="cursor:pointer">
                 <i class="fas fa-<%=si_1_mes%> light-icon" style="color:#<%=si_1%>"  name="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_1" value="<%=v1%>"></i>
+                
               </div>
               <div id="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_2" class="light" onclick="toggleLeftLight(this.id)"
                 style="cursor:pointer">
                 <i class="fas fa-<%=si_2_mes%> light-icon" style="color:#<%=si_2%>"  name="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_2" value="<%=v2%>"></i>
+                <input type="text" id="light-<%=parseInt(y/7)+1%>-<%=y%7+1%>" value="" style="display:none;">
               </div>
               <%
                y++;
