@@ -119,7 +119,7 @@ router.post('/upload_signal', (req, res)=>{
 });
 
 router.post('/edit_proc', (req, res)=>{
-  console.log(req.body);
+  console.log(req.body.led-1-1);
 });
 
 router.post('/upload_live', (req, res) =>{
