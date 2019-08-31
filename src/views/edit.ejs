@@ -21,7 +21,7 @@
       function jeokdragon(){
         var hooo = confirm('적용하시겠습니까? [확인]을 누르시면 바로 반영됩니다.');
             if(hooo){
-              window.location.href='/edit_proc';
+              document.getElementById('m').submit();
             }else{
               
             }
@@ -51,6 +51,7 @@
     %>
   </head>
   <body>
+    <form action="/edit_proc" method="POST" id="m">
     <nav class="sidebar-container">
       <div class="sidebar">
         <div class="sidebar-header">
@@ -74,7 +75,7 @@
       <div class="road-box">
         <div class="asc-traffic">
           <div class="asc-direction">
-            <h6 class="direction-name">&lt-- 도시<br />방면</h6>
+            <h6 class="direction-name">&lt-- 시골<br />방면</h6>
           </div>
         </div>
         <img
@@ -88,15 +89,16 @@
             var x = 1, y  = 0;
             var i = 0;
             for(i = 0; i < 21; i++){
-              var traffic;
               %>
               <div id="led_<%=parseInt(y/7)+1%>_<%=y%7+1%>" class="led">
                   <input
                     type="image"
                     id="led-<%=parseInt(y/7)+1%>-<%=y%7+1%>"
+                    name="led-<%=parseInt(y/7)+1%>-<%=y%7+1%>"
                     class="led_cross"
                     src="/images/led-<%=echo_traffic[i]%>.png"
                     onclick="toggleLED(this.id);"
+                    value="<%=echo_traffic[i]%>"
                   />
                 </div>
               <%
@@ -113,16 +115,22 @@
               if(echo_signal[i] == 1){
                 var si_1_mes = "arrow-right";
                 var si_2_mes = "times";
+                var v1 = "1";
+                var v2 = "2";
                 var si_1 = "51cf66";
                 var si_2 = "e82828";
               }else if(echo_signal[i] == 2){
                 var si_1_mes = "times";
                 var si_2_mes = "arrow-left";
+                var v1 = "2";
+                var v2 = "1";
                 var si_1 = "e82828";
                 var si_2 = "51cf66";
               }else if(echo_signal[i] == 3){
                 var si_1_mes = "times";
                 var si_2_mes = "times";
+                var v1 = "2";
+                var v2 = "2";
                 var si_1 = "e82828";
                 var si_2 = "e82828";
               }
@@ -130,11 +138,11 @@
               %>
               <div id="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_1" class="light" onclick="toggleLeftLight(this.id)"
                 style="cursor:pointer">
-                <i class="fas fa-<%=si_1_mes%> light-icon" style="color:#<%=si_1%>"></i>
+                <i class="fas fa-<%=si_1_mes%> light-icon" style="color:#<%=si_1%>"  name="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_1" value="<%=v1%>"></i>
               </div>
               <div id="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_2" class="light" onclick="toggleLeftLight(this.id)"
                 style="cursor:pointer">
-                <i class="fas fa-<%=si_2_mes%> light-icon" style="color:#<%=si_2%>"></i>
+                <i class="fas fa-<%=si_2_mes%> light-icon" style="color:#<%=si_2%>"  name="light_<%=parseInt(y/7)+1%>_<%=y%7+1%>_2" value="<%=v2%>"></i>
               </div>
               <%
                y++;
@@ -166,5 +174,6 @@
         >
       </div>
     </div>
+  </form>
   </body>
 </html>
