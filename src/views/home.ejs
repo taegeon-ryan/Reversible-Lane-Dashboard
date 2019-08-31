@@ -86,7 +86,7 @@
             for(i = 0; i < 21; i++){
               var traffic;
               %>
-              <div id="led_<%=y//7%>_<%=y%7+1%>" class="led">
+              <div id="led_<%=parseInt(y/7)%>_<%=y%7+1%>" class="led">
                   <img
                     id="led-1-1"
                     class="led_cross"
@@ -120,11 +120,12 @@
                 var si_1 = "e82828";
                 var si_2 = "e82828";
               }
+              
               %>
-              <div id="light_<%=y//7%>_<%=y%7+1%>_1" class="light">
+              <div id="light_<%=parseInt(y/7)%>_<%=y%7+1%>_1" class="light">
                 <i class="fas fa-<%=si_1_mes%> light-icon" style="color:#<%=si_1%>"></i>
               </div>
-              <div id="light_<%=y//7%>_<%=y%7+1%>_2" class="light">
+              <div id="light_<%=parseInt(y/7)%>_<%=y%7+1%>_2" class="light">
                 <i class="fas fa-<%=si_2_mes%> light-icon" style="color:#<%=si_2%>"></i>
               </div>
               <%
