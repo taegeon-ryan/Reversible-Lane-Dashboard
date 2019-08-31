@@ -120,9 +120,9 @@ var test_y = 2;
 // }, 100);
 
 var count = 0;
-var traffic_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var traffic_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var traffic_simple = [0,0];
-var status_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var status_normal = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 var now_status = setInterval(()=>{
   var selectsql = 'SELECT * FROM signal_data ORDER BY idx DESC LIMIT 1';
