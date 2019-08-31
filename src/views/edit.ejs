@@ -95,10 +95,11 @@
               var traffic;
               %>
               <div id="led_<%=parseInt(y/7)+1%>_<%=y%7+1%>" class="led">
-                  <img
+                  <input
+                  type="image"
                     id="led-1-1"
                     class="led_cross"
-                    src="/images/led-<%=echo_traffic[i]%>.png"
+                    src="/  images/led-<%=echo_traffic[i]%>.png"
                     onclick="toggleLED(this.id);"
                   />
                 </div>
